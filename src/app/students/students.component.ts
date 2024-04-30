@@ -27,6 +27,15 @@ dataSource = new MatTableDataSource<Student>([]);
   constructor(private studentService: StudentsService){}
 
   ngOnInit() {
+    this.loadAllStudents();
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.id.toString().includes(filter) 
+      || data.firstName.toLowerCase().includes(filter) 
+      || data.lastName.toLowerCase().includes(filter) 
+      || data.email.toLowerCase().includes(filter) 
+      || data.gender.toLowerCase().includes(filter)
+      || data.birthDate.toLowerCase().includes(filter);
+    };
   }
 
   loadAllStudents(){
@@ -36,6 +45,17 @@ dataSource = new MatTableDataSource<Student>([]);
         this.dataSource.data = res;
       }
     )
+  }
+
+  applyFilterNOusage(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  applyFilter(event: Event) {
+    const filters = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filters.trim().toLowerCase();
   }
 
 
