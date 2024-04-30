@@ -20,7 +20,6 @@ El proyecto cliente generado a partir de Angular cli version 17.3.6 que sirve pa
 ## 3.- Pruebas
   * Hacer un `ng build` del proyecto. Los artefactos producto del build quedarán almacenados en la carpeta `dist/`.
   * Hacer un `ng test` para ejecutar test unitarios via [Karma](https://karma-runner.github.io).
-  * Descargar Postman.
 
 ## 4.- Ejecución
   * Hacer un `ng serve` para servidor dev.
