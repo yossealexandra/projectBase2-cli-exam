@@ -3,13 +3,19 @@
         <div class="col-12">
             <mat-card>
                 <h1 style="border-color: green;">Estudiantes</h1>
-                <button class="btn btn-success" (click)="loadAllStudents()">Conoce a nuestros estudiantes</button>
+                <h2>Listado de estudiantes</h2>
             </mat-card>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <mat-card>
+                <mat-form-field>
+                    <mat-label>
+                        Search for any field
+                    </mat-label>
+                    <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                </mat-form-field>
                 <table mat-table [dataSource]="dataSource" class="table table-striped" text="center">
 
                     <!--- Note that these columns can be defined in any order.
@@ -53,9 +59,9 @@
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-              </mat-card>
+                </table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+            </mat-card>
         </div>
     </div>
 </div>

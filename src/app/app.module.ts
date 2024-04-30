@@ -7,6 +7,8 @@ import { StudentsComponent } from './students/students.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -22,7 +24,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule
+  ],
+  exports: [
+    MatFormFieldModule,
+    MatInputModule,
   ],
   bootstrap: [AppComponent]
 })
