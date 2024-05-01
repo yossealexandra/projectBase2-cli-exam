@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { StudentsService } from '../service/students.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,10 +11,10 @@ import { Student } from '../model/student.model';
   styleUrl: './students.component.css'
 })
 export class StudentsComponent implements OnInit{
-[x: string]: any;
 
 displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'gender', 'birthDate'];
 dataSource = new MatTableDataSource<Student>([]);
+clickedRows = new Set<Student>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -28,14 +28,7 @@ dataSource = new MatTableDataSource<Student>([]);
 
   ngOnInit() {
     this.loadAllStudents();
-    this.dataSource.filterPredicate = function(data, filter: string): boolean {
-      return data.id.toString().includes(filter) 
-      || data.firstName.toLowerCase().includes(filter) 
-      || data.lastName.toLowerCase().includes(filter) 
-      || data.email.toLowerCase().includes(filter) 
-      || data.gender.toLowerCase().includes(filter)
-      || data.birthDate.toLowerCase().includes(filter);
-    };
+    this.loadFilterPredicate();
   }
 
   loadAllStudents(){
@@ -47,16 +40,22 @@ dataSource = new MatTableDataSource<Student>([]);
     )
   }
 
-  applyFilterNOusage(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  loadFilterPredicate() {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.id.toString().includes(filter) 
+      || data.firstName.toLowerCase().includes(filter) 
+      || data.lastName.toLowerCase().includes(filter) 
+      || data.email.toLowerCase().includes(filter) 
+      || data.gender.toLowerCase().includes(filter)
+      || data.birthDate.toLowerCase().includes(filter);
+    };
   }
 
   applyFilter(event: Event) {
     const filters = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filters.trim().toLowerCase();
   }
+
 
 
 }

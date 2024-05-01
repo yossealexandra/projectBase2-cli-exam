@@ -25,3 +25,6 @@ El proyecto cliente generado a partir de Angular cli version 17.3.6 que sirve pa
   * Hacer un `ng serve` para servidor dev.
   * Cargar en un navegador la url: http://localhost:4200/.
 
+## 5.- Diagramación
+* Diagrama de secuencias del proyecto (PENDING) se ubicará en directorio raíz del proyecto.
+
