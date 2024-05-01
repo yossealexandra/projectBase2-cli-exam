@@ -1,12 +1,49 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <mat-card>
-                <h1 style="border-color: green;">Estudiantes</h1>
+                <h1>Estudiantes</h1>
                 <h2>Listado de estudiantes</h2>
-            </mat-card>
         </div>
     </div>
+
+    <!-- Panel for detailed info of Student -->
+    <div class="columns" style="float: right;">
+        <div class="col-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"></div>
+                    <div class="panel-body">
+                        <h2></h2>
+                        <dl>
+                            <h2>Estudiante</h2>
+                            @for (clickedRow of clickedRows; track clickedRow) {
+                                <dt>First Name</dt>
+                                <dd>{{clickedRow.firstName}}</dd>
+                                <dt>Last Name</dt>
+                                <dd>{{clickedRow.lastName}}</dd>
+                                <dt>Passport</dt>
+                                <dd>{{clickedRow.passport}}</dd>
+                                <dt>email</dt>
+                                <dd>{{clickedRow.email}}</dd>
+                                <dt>Gender</dt>
+                                <dd>{{clickedRow.gender}}</dd>
+                                <dt>Address</dt>
+                                <dd>{{clickedRow.address}}</dd>
+                                <dt>Birth Date</dt>
+                                <dd>{{clickedRow.birthDate}}</dd>
+                                <dt>Phone Number</dt>
+                                <dd>{{clickedRow.phoneNumber}}</dd>
+                                <dt>Nationality</dt>
+                                <dd>{{clickedRow.nationality}}</dd>
+                                <dt>Marital Status</dt>
+                                <dd>{{clickedRow.maritalStatus}}</dd>
+                                {{clickedRows.clear()}}
+                                }
+                        </dl>
+                    </div>
+            </div> 
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <mat-card>
@@ -17,48 +54,44 @@
                     <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Search...">
                 </mat-form-field>
                 <table mat-table [dataSource]="dataSource" class="table table-striped" text="center">
-
-                    <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-                  
-                    <!-- Position Column -->
+                    <!-- ID Column -->
                     <ng-container matColumnDef="id">
                         <th mat-header-cell *matHeaderCellDef> ID </th>
                         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                     </ng-container>
   
-                    <!-- Name Column -->
+                    <!-- First Name Column -->
                     <ng-container matColumnDef="firstName">
-                        <th mat-header-cell *matHeaderCellDef> firstName </th>
+                        <th mat-header-cell *matHeaderCellDef> First Name </th>
                         <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
                     </ng-container>
   
-                    <!-- Weight Column -->
+                    <!-- Last Name Column -->
                     <ng-container matColumnDef="lastName">
-                        <th mat-header-cell *matHeaderCellDef> lastName </th>
+                        <th mat-header-cell *matHeaderCellDef> Last Name </th>
                         <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
                     </ng-container>
   
-                    <!-- Symbol Column -->
+                    <!-- email Column -->
                     <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef> email </th>
                         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                     </ng-container>
 
-                    <!-- Symbol Column -->
+                    <!-- Gender Column -->
                     <ng-container matColumnDef="gender">
-                        <th mat-header-cell *matHeaderCellDef> gender </th>
+                        <th mat-header-cell *matHeaderCellDef> Gender </th>
                         <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
                     </ng-container>
 
-                    <!-- Symbol Column -->
+                    <!-- Birth Date Column -->
                     <ng-container matColumnDef="birthDate">
-                        <th mat-header-cell *matHeaderCellDef> birthDate </th>
+                        <th mat-header-cell *matHeaderCellDef> Birth Date </th>
                         <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row (click)="clickedRows.add(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
                 <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
             </mat-card>
